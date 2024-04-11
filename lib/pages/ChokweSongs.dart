@@ -1,50 +1,94 @@
 import 'package:flutter/material.dart';
+import 'package:otjiomuise_hymn/components/lists.dart';
+import 'package:otjiomuise_hymn/components/songcard.dart';
 
 class ChokweSongs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Map<String, String> chokweSongs = {
-      'TUHALISENU MWE ZAMBI': '''
-Tuhalisenu mwe Zambi,
-Mukwa kusolola vumbi;
-Tata, tumuhalisenu,
-Ni Mwana ni mwe Spiritu.''',
-      // Add more Chokwe songs here...
-    };
-
-    return ListView.builder(
-      itemCount: chokweSongs.length,
-      itemBuilder: (context, index) {
-        final songTitle = chokweSongs.keys.elementAt(index);
-        return ListTile(
-          title: Text(songTitle),
-          onTap: () {
-            _showLyrics(context, chokweSongs[songTitle]!, songTitle);
-          },
-        );
-      },
+    return Scaffold(
+      body: Column(
+        children: [
+          Expanded(
+            child: SongSelectionGrid(songList: chokweSongs),
+          ),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    "MATAWIZO",
+                    style: TextStyle(fontSize: 18),
+                  ),
+                ),
+                Expanded(
+                  child: SongSelectionGrid(songList: chokwe2Songs),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
+}
 
-  void _showLyrics(BuildContext context, String lyrics, String songTitle) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(songTitle),
-          content: SingleChildScrollView(
-            child: Text(lyrics),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text('Close'),
+class SongSelectionGrid extends StatelessWidget {
+  final List<Song> songList;
+
+  SongSelectionGrid({required this.songList});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: GridView.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 8, // You can adjust the number of columns here
+        ),
+        itemCount: songList.length,
+        itemBuilder: (context, index) {
+          return InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      SongDetailsPage(songIndex: index, songList: songList),
+                ),
+              );
+            },
+            child: Card(
+              child: Center(
+                child: Text(
+                 songList[index].id.toString(), 
+                  style: const TextStyle(fontSize: 16),
+                ),
+              ),
             ),
-          ],
-        );
-      },
+          );
+        },
+      ),
+    );
+  }
+}
+
+class SongDetailsPage extends StatelessWidget {
+  final int songIndex;
+  final List<Song> songList;
+
+  SongDetailsPage({required this.songIndex, required this.songList});
+
+  @override
+  Widget build(BuildContext context) {
+    final selectedSong = songList[songIndex];
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(selectedSong.title),
+      ),
+      body: SongCard(selectedSong: selectedSong),
     );
   }
 }

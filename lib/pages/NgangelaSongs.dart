@@ -16,31 +16,34 @@ class NgangelaSongs extends StatelessWidget {
 class SongSelectionGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 6, // You can adjust the number of columns here
-      ),
-      itemCount: ngangelaSongs.length,
-      itemBuilder: (context, index) {
-        return InkWell(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => SongDetailsPage(songIndex: index),
-              ),
-            );
-          },
-          child: Card(
-            child: Center(
-              child: Text(
-                ngangelaSongs[index].id.toString(),
-                style: const TextStyle(fontSize: 24),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: GridView.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 8, // You can adjust the number of columns here
+        ),
+        itemCount: ngangelaSongs.length,
+        itemBuilder: (context, index) {
+          return InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SongDetailsPage(songIndex: index),
+                ),
+              );
+            },
+            child: Card(
+              child: Center(
+                child: Text(
+                  ngangelaSongs[index].id.toString(),
+                  style: const TextStyle(fontSize: 16),
+                ),
               ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }
