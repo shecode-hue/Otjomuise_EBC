@@ -19,21 +19,18 @@ class SongCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    selectedSong.title,
-                    style: const TextStyle(
-                        fontSize: 24, fontWeight: FontWeight.bold),
-                  ),
                   const SizedBox(height: 20),
-               
                   Expanded(
                     child: SingleChildScrollView(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: selectedSong.verses.map((verse) {
-                          return Text(
-                            verse,
-                            style: const TextStyle(fontSize: 16),
+                          return Center(
+                            child: Text(
+                              verse,
+                              style: const TextStyle(fontSize: 55,
+                              fontWeight: FontWeight.w900),
+                            ),
                           );
                         }).toList(),
                       ),

@@ -36,7 +36,8 @@ class HomePage extends StatelessWidget {
                   'Let everything that has breath praise the LORD. Praise the LORD.',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 25,
+                    fontWeight:FontWeight.w800,
                     fontStyle: FontStyle.italic, // Make text italic
                   ),
                 ),
@@ -44,8 +45,8 @@ class HomePage extends StatelessWidget {
                   ' \n Psalm 150:6',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 22,
+                    fontWeight: FontWeight.w800,
                     // Keep Psalm part bold
                   ),
                 ),
@@ -76,7 +77,13 @@ class HomePage extends StatelessWidget {
                 label: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Hymnal'),
+                    Text('Hymnal',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.w800,
+                    ),
+                    ),
                     Icon(Icons.chevron_right), // Forward angle icon
                   ],
                 ),
@@ -99,7 +106,11 @@ class HomePage extends StatelessWidget {
                 label: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Great Revelation Choir'),
+                    Text('Great Revelation Choir',
+                      style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.w800,
+                    ),),
                     Icon(Icons.chevron_right), // Forward angle icon
                   ],
                 ),
@@ -197,8 +208,8 @@ class GRC extends StatelessWidget {
           Container(
             padding: const EdgeInsets.only(bottom: 16.0),
             child: Image.asset(
-              'images/WhatsApp Image 2024-04-11 at 13.24.25.jpeg', // Replace 'your_image.png' with your image asset path
-              height: 300, // Adjust the height of the image
+              'images/WhatsApp Image 2024-04-21 at 15.43.48.jpeg', // Replace 'your_image.png' with your image asset path
+              height: 500, // Adjust the height of the image
                  width: MediaQuery.of(context).size.width *
                   0.9, // 90% width of the screen
             ),
@@ -208,7 +219,7 @@ class GRC extends StatelessWidget {
               width: MediaQuery.of(context).size.width *
                   0.9, // 90% width of the screen
               height: MediaQuery.of(context).size.height *
-                  0.1, // 10% height of the screen
+                  0.05, // 10% height of the screen
               child: ElevatedButton.icon(
                 onPressed: () {
                  
@@ -231,7 +242,7 @@ class GRC extends StatelessWidget {
               width: MediaQuery.of(context).size.width *
                   0.9, // 90% width of the screen
               height: MediaQuery.of(context).size.height *
-                  0.1, // 10% height of the screen
+                  0.05, // 10% height of the screen
               child: ElevatedButton.icon(
                 onPressed: () {
                   

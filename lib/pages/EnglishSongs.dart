@@ -1,51 +1,89 @@
 import 'package:flutter/material.dart';
+import 'package:otjiomuise_hymn/components/lists.dart';
+import 'package:otjiomuise_hymn/components/songcard.dart';
 
 class EnglishSongs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Map<String, String> englishSongs = {
-      'BLESSED ASSURANCE': '''
-Blessed assurance, Jesus is mine!
-Oh, what a foretaste of glory divine!
-Heir of salvation, purchase of God,
-Born of His Spirit, washed in His blood.
-''',
-      // Add more English songs here...
-    };
-
-    return ListView.builder(
-      itemCount: englishSongs.length,
-      itemBuilder: (context, index) {
-        final songTitle = englishSongs.keys.elementAt(index);
-        return ListTile(
-          title: Text(songTitle),
-          onTap: () {
-            _showLyrics(context, englishSongs[songTitle]!, songTitle);
-          },
-        );
-      },
+    return Scaffold(
+      body: Center(
+        child: SongSelectionGrid(),
+      ),
     );
   }
+}
 
-  void _showLyrics(BuildContext context, String lyrics, String songTitle) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(songTitle),
-          content: SingleChildScrollView(
-            child: Text(lyrics),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text('Close'),
+class SongSelectionGrid extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: GridView.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 8, // You can adjust the number of columns here
+        ),
+        itemCount: englishSongs.length,
+        itemBuilder: (context, index) {
+          return InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SongDetailsPage(songIndex: index),
+                ),
+              );
+            },
+            child: Card(
+              child: Center(
+                child: Text(
+                  englishSongs[index].id.toString(),
+                  style: const TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.w800,
+                    fontStyle: FontStyle.italic,
+                  ),
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class SongDetailsPage extends StatelessWidget {
+  final int songIndex;
+
+  SongDetailsPage({required this.songIndex});
+
+  @override
+  Widget build(BuildContext context) {
+    final selectedSong = englishSongs[songIndex];
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Row(
+          children: [
+            Text(
+              selectedSong.id.toString(),
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+                Text(
+              '.',
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(
+              width: 5,
+            ),
+            Text(
+              selectedSong.title,
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
           ],
-        );
-      },
+        ),
+      ),
+      body: SongCard(selectedSong: selectedSong),
     );
   }
 }

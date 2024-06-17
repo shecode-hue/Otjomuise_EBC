@@ -37,7 +37,11 @@ class SongSelectionGrid extends StatelessWidget {
               child: Center(
                 child: Text(
                   ngangelaSongs[index].id.toString(),
-                  style: const TextStyle(fontSize: 16),
+                  style: const TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.w800,
+                    fontStyle: FontStyle.italic,
+                  ),
                 ),
               ),
             ),
@@ -59,7 +63,25 @@ class SongDetailsPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(selectedSong.title),
+        title: Row(
+          children: [
+            Text(
+              selectedSong.id.toString(),
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+                Text(
+              '.',
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(
+              width: 5,
+            ),
+            Text(
+              selectedSong.title,
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
       ),
       body: SongCard(selectedSong: selectedSong),
     );
